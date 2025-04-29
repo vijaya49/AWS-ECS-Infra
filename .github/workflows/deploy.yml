@@ -1,0 +1,21 @@
+name: Build Docker Image
+
+on:
+  repository_dispatch:
+    types: [trigger-docker-build]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Repo A
+        uses: actions/checkout@v3
+        with:
+          repository: vijaya49/Static-Web-Host-Dev
+          token: ${{ secrets.REPO_B_PAT }}
+          path: repo-a
+
+      - name: Build Docker Image
+        run: |
+          cd repo-a
+          docker build -t my-app:latest .
