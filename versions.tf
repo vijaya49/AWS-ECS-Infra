@@ -16,7 +16,7 @@ terraform {
     use_lockfile = true 
   }
 }
-######## assume role method testing ########
+######## assume role method testing #########
 provider "aws" {
   region     = "us-east-1"
 }
