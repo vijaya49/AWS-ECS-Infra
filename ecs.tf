@@ -1,5 +1,5 @@
 module "ecs" {
-  source          = "git::https://github.com/vijaya49/Terraform-Modules.git//vpc?ref=main"
+  source          = "git::https://github.com/vijaya49/Terraform-Modules.git//ecs?ref=main"
 
   app_name        = "prod-ecs"
   container_port  = 80
