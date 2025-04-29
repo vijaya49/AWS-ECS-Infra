@@ -1,3 +1,7 @@
+output "ecs_cluster_name" {
+    description = "The Name of the ECS Cluster"
+    value = module.ecs.name
+}
 output "ecs_cluster_id" {
   description = "The ID of the ECS Cluster"
   value       = module.ecs.ecs_cluster_id
@@ -16,9 +20,4 @@ output "task_definition_arn" {
 output "load_balancer_dns_name" {
   description = "The DNS name of the Load Balancer"
   value       = module.ecs.load_balancer_dns_name
-}
-
-output "target_group_arn" {
-  description = "The ARN of the Target Group"
-  value       = module.ecs.target_group_arn
 }
