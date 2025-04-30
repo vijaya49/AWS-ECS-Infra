@@ -1,31 +1,54 @@
-To fix the issue:
+# 🚀 Build and Deploy to AWS ECS
 
-🔹 1. Use a Classic Personal Access Token
-Fine-grained tokens do not support repository_dispatch across repos. You need to use a classic token.
+This repository contains a GitHub Actions workflow to **automatically build, scan, and deploy** a Docker image to **Amazon ECS** whenever:
+- A `push` is made to the `main` branch, or
+- A `repository_dispatch` event is triggered from another repository.
 
-🔗 Generate a Classic PAT here
+---
 
-🔹 2. Assign the Right Scopes
-When generating the token:
+## 🔁 Triggered By
 
-✅ repo — Full control of private repositories (mandatory)
+- `push` to `main`
+- `repository_dispatch` event with type: `trigger-docker-build`
 
-✅ workflow — Update GitHub Actions workflows
+This allows external repositories (like `vijaya49/Static-Web-Host-Dev`) to trigger the build and deployment process.
 
-You don’t need to restrict it to a single repo — this will ensure it can fire repository_dispatch to another repo.
+---
 
-🔹 3. Store the Classic PAT in Repo A as PERSONAL_ACCESS_TOKEN
-In Repo A:
+## 📋 Workflow Overview
 
-Go to Settings > Secrets and variables > Actions
+### 🧱 Steps
 
-Add new secret:
+1. **Checkout** this repo and the source repo (`Repo A`)
+2. **Configure AWS credentials** using secrets
+3. **Login to Amazon ECR**
+4. **Build Docker image** from `Repo A` source code
+5. **Scan image** for vulnerabilities using [Trivy](https://github.com/aquasecurity/trivy)
+6. **Tag and push image** to ECR with `latest` and short SHA tag
+7. **Setup and run Terraform** to deploy the updated image to ECS
 
-Name: PERSONAL_ACCESS_TOKEN
+---
 
-Value: (Paste the newly generated classic PAT)
+## 🔐 Required Secrets
 
-🔁 Then re-run the workflow in Repo A
-That should fix the 403 and successfully trigger the workflow in Repo B.
+Set the following secrets in your repository:
 
-Would you like a one-line shell command to test the token manually before committing the workflow?
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `REPO_B_PAT`: Personal access token with permission to access Repo A
+
+---
+
+## 🧪 Tools Used
+
+- [GitHub Actions](https://github.com/features/actions)
+- [AWS CLI](https://aws.amazon.com/cli/)
+- [Trivy](https://github.com/aquasecurity/trivy)
+- [Terraform](https://www.terraform.io/)
+
+---
+
+## 📘 Related
+
+- Triggering Repo: [`vijaya49/Static-Web-Host-Dev`](https://github.com/vijaya49/Static-Web-Host-Dev)
+- Trigger Event: `repository_dispatch` → `trigger-docker-build`
