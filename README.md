@@ -47,7 +47,10 @@ Set the following secrets in your repository:
 - [Terraform](https://www.terraform.io/)
 
 ---
+## 📘 Related
 
+- Triggering Repo: [`vijaya49/Static-Web-Host-Dev`](https://github.com/vijaya49/Static-Web-Host-Dev)
+- Trigger Event: `repository_dispatch` → `trigger-docker-build`
 
 
 # 🚀 Terraform Operations Workflow
@@ -122,7 +125,4 @@ Steps:
 The workflow uses **Terraform 1.10.5**. You can change this version by editing the `terraform_version` input in the workflow file.
 
 
-## 📘 Related
 
-- Triggering Repo: [`vijaya49/Static-Web-Host-Dev`](https://github.com/vijaya49/Static-Web-Host-Dev)
-- Trigger Event: `repository_dispatch` → `trigger-docker-build`
