@@ -23,7 +23,7 @@ jobs:
     - name: Clone Repo A
       uses: actions/checkout@v3
       with:
-        repository: vijaya49/Static-Web-Host-Dev
+        repository: vijaya49/Developer-Repo
         token: ${{ secrets.REPO_B_PAT }}
         path: repo-a
 
